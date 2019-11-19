@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "142095974638",
+    "firebase_url": "https://coffee-n-go.firebaseio.com",
+    "project_id": "coffee-n-go",
+    "storage_bucket": "coffee-n-go.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:142095974638:android:db077204fce0b3c67033ff",
+        "android_client_info": {
+          "package_name": "com.example.coffee_n_go"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "142095974638-uctmkenvc0hj481511gbjeboo5jnuvl4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.coffee_n_go",
+            "certificate_hash": "980c270ea3d13ebc7788f7ed3c728d31d98f192f"
+          }
+        },
+        {
+          "client_id": "142095974638-5cijgi285i7uf7o3748n82125dc0o2i0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIYxwEckn24exk3E_Z215vwZxJ7asp-t0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "142095974638-5cijgi285i7uf7o3748n82125dc0o2i0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

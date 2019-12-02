@@ -18,7 +18,7 @@
         app:srcCompat="@drawable/main" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/customer"
         android:layout_width="118dp"
         android:layout_height="74dp"
         android:layout_marginTop="80dp"
@@ -28,7 +28,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/manager"
         android:layout_width="118dp"
         android:layout_height="74dp"
         android:layout_marginTop="236dp"
@@ -38,13 +38,13 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/worker"
         android:layout_width="122dp"
         android:layout_height="76dp"
         android:layout_marginTop="232dp"
         android:layout_marginEnd="120dp"
         android:text="worker"
-        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintEnd_toStartOf="@+id/manager"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <ImageView

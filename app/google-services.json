@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "142095974638-ta6eu28pn6kvhho98ccgmlp1sfkfi58b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.coffee_n_go",
+            "certificate_hash": "ba685b2d1aeebfaf99ae2e7663ad327f096c69d0"
+          }
+        },
+        {
           "client_id": "142095974638-uctmkenvc0hj481511gbjeboo5jnuvl4.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

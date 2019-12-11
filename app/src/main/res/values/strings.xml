@@ -9,4 +9,18 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+
+
+    <string-array name="Coffie_Drinks">
+        <item>Onion</item>
+        <item>Sausage</item>
+        <item>Milk</item>
+        <item>Garlic</item>
+        <item>Beef</item>
+        <item>Veggies</item>
+        <item>Olive</item>
+        <item>Cheese</item>
+        <item>Tuna</item>
+        <item>Mushrooms</item>
+    </string-array>
 </resources>

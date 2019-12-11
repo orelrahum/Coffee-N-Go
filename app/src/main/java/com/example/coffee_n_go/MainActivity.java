@@ -29,12 +29,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         button_customer= (Button) findViewById(R.id.customer);
-        button_customer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openWorker();
-            }
-        });
         button_CEO= (Button) findViewById(R.id.CEO);
         button_CEO.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,6 +36,16 @@ public class MainActivity extends AppCompatActivity {
                 openWorker();
             }
         });
+
+
+        button_customer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, CustomerActivity.class);
+                startActivity(i);
+            }
+        });
+
     }
     public void openWorker(){
         Intent intent = new Intent(this,Login.class);

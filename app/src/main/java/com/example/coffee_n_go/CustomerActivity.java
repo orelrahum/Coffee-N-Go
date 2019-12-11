@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,7 +23,7 @@ public class CustomerActivity extends AppCompatActivity {
     static String DrinkFromList;
     String[] Drinks_items;
     FirebaseDatabase myDataBase;
-    Button Drink;
+    EditText Drink;
     Button TakeBtn;
 
 
@@ -33,13 +32,14 @@ public class CustomerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer);
         TakeBtn = findViewById(R.id.TakeBtn);
-        Drink = findViewById(R.id.DrinksBtn);
+        Drink = findViewById(R.id.DrinksEt);
         name = findViewById(R.id.NameFillByUser);
         phone = findViewById(R.id.PhoneFillByUser);
         myDataBase = FirebaseDatabase.getInstance();
         RootRef = myDataBase.getReference("Orders");
 
         Drinks_items = getResources().getStringArray(R.array.Coffie_Drinks);
+
         Drink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,12 +73,12 @@ public class CustomerActivity extends AppCompatActivity {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                                String UserName = name.getText().toString().trim();
-                                String Userphone = phone.getText().toString().trim();
+                                String UserName = name.getText().toString();
+                                String Userphone = phone.getText().toString();
                                 String Orderid = RootRef.push().getKey();
                                 Order o = new Order(UserName, Userphone, DrinkFromList, Orderid);
                                 FirebaseDatabase.getInstance().getReference("Orders").child(Orderid).setValue(o);
-                                RootRef.push().setValue(Orderid);
+                                startActivity(new Intent(CustomerActivity.this,Pop.class));
                             }
 
                             @Override
@@ -91,7 +91,6 @@ public class CustomerActivity extends AppCompatActivity {
 
 
         });
-
 
     }
 }

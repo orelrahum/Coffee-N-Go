@@ -12,15 +12,16 @@
 
 
     <string-array name="Coffie_Drinks">
-        <item>Onion</item>
-        <item>Sausage</item>
-        <item>Milk</item>
-        <item>Garlic</item>
-        <item>Beef</item>
-        <item>Veggies</item>
-        <item>Olive</item>
-        <item>Cheese</item>
-        <item>Tuna</item>
-        <item>Mushrooms</item>
+        <item>הפוך</item>
+        <item>מאג</item>
+        <item>מקיאטו</item>
+        <item>לאטה</item>
+        <item>שוקו</item>
+        <item>קפה שחור</item>
+        <item>אמריקנו</item>
+        <item>אספרסו</item>
+        <item>תה</item>
+        <item>סיידר</item>
+        <item>סחלב</item>
     </string-array>
 </resources>

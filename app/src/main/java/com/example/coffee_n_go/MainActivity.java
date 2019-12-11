@@ -13,9 +13,7 @@ public class MainActivity extends AppCompatActivity {
     private Button button_worker;
     private Button button_CEO;
     private Button button_customer;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
     public Map<String, Object> user = new HashMap<>();
-    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

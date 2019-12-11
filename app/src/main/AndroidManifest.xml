@@ -11,9 +11,6 @@
         android:theme="@style/AppTheme">
         <activity android:name=".CustomerActivity"></activity>
         <activity android:name=".SecondActivity" />
-        <activity
-            android:name=".ui.login.LoginActivity"
-            android:label="@string/title_activity_login" />
         <activity android:name=".Login" />
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -22,6 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Pop"></activity>
     </application>
 
 </manifest>

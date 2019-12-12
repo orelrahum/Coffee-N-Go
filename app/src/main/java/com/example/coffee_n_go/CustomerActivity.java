@@ -10,20 +10,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class CustomerActivity extends AppCompatActivity {
     DatabaseReference RootRef;
     EditText name;
     EditText phone;
-    static String DrinkFromList;
+    String DrinkFromList;
     String[] Drinks_items;
     FirebaseDatabase myDataBase;
-    EditText Drink;
+    Button Drink;
     Button TakeBtn;
 
 
@@ -32,7 +29,7 @@ public class CustomerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer);
         TakeBtn = findViewById(R.id.TakeBtn);
-        Drink = findViewById(R.id.DrinksEt);
+        Drink = findViewById(R.id.DrinksBtn);
         name = findViewById(R.id.NameFillByUser);
         phone = findViewById(R.id.PhoneFillByUser);
         myDataBase = FirebaseDatabase.getInstance();
@@ -51,6 +48,7 @@ public class CustomerActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         DrinkFromList = Drinks_items[i];
+                        Drink.setText(DrinkFromList);
                         dialogInterface.dismiss();
                     }
                 });
@@ -67,29 +65,22 @@ public class CustomerActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-
-                RootRef.child("Orders")
-                        .addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                                String UserName = name.getText().toString();
-                                String Userphone = phone.getText().toString();
-                                String Orderid = RootRef.push().getKey();
-                                Order o = new Order(UserName, Userphone, DrinkFromList, Orderid);
-                                FirebaseDatabase.getInstance().getReference("Orders").child(Orderid).setValue(o);
-                                startActivity(new Intent(CustomerActivity.this,Pop.class));
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-                            }
-
-                        });
-
-            }
-
-
+                RootRef.child("Orders");
+                String UserName = name.getText().toString();
+                String Userphone = phone.getText().toString();
+                String Orderid = RootRef.push().getKey();
+                Order o = new Order(UserName, Userphone, DrinkFromList, Orderid);
+                FirebaseDatabase.getInstance().getReference("Orders").child(Orderid).setValue(o);
+                startActivity(new Intent(CustomerActivity.this,Pop.class));
+               // FirebaseDatabase.getInstance().getReference("Orders").child(Orderid).setValue(o,complitionListener);
+//                DatabaseReference.CompletionListener complitionListener = new DatabaseReference.CompletionListener() {
+//                    @Override
+//                    public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+//                        if (databaseError != null)
+//
+//                    }
+//                }
+                }
         });
 
     }

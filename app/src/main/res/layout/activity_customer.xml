@@ -94,8 +94,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.834" />
 
-    <EditText
-        android:id="@+id/DrinksEt"
+    <Button
+        android:id="@+id/DrinksBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Choose"

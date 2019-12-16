@@ -1,5 +1,7 @@
 package com.example.coffee_n_go;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,7 +11,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -43,7 +47,6 @@ public class CustomerActivity extends AppCompatActivity {
 
                 final AlertDialog.Builder mBuilder = new AlertDialog.Builder(CustomerActivity.this);
                 mBuilder.setTitle("Drinks:");
-
                 mBuilder.setSingleChoiceItems(Drinks_items, -1, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -60,9 +63,7 @@ public class CustomerActivity extends AppCompatActivity {
 
         });
 
-
         TakeBtn.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 RootRef.child("Orders");
@@ -70,18 +71,19 @@ public class CustomerActivity extends AppCompatActivity {
                 String Userphone = phone.getText().toString();
                 String Orderid = RootRef.push().getKey();
                 Order o = new Order(UserName, Userphone, DrinkFromList, Orderid);
-                FirebaseDatabase.getInstance().getReference("Orders").child(Orderid).setValue(o);
-                startActivity(new Intent(CustomerActivity.this,Pop.class));
-               // FirebaseDatabase.getInstance().getReference("Orders").child(Orderid).setValue(o,complitionListener);
-//                DatabaseReference.CompletionListener complitionListener = new DatabaseReference.CompletionListener() {
-//                    @Override
-//                    public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-//                        if (databaseError != null)
-//
-//                    }
-//                }
-                }
+                FirebaseDatabase.getInstance().getReference("Orders").child(Orderid).setValue(o,complitionListener);
+            }
         });
-
     }
-}
+    DatabaseReference.CompletionListener complitionListener = new DatabaseReference.CompletionListener() {
+        @Override
+        public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+            if(databaseError != null){
+                Toast.makeText(CustomerActivity.this,databaseError.getMessage(),Toast.LENGTH_LONG).show();
+            }
+            else{
+                startActivity(new Intent(CustomerActivity.this,Pop.class));
+            }
+        }
+    };
+    }

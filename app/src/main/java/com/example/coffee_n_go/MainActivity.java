@@ -23,7 +23,9 @@ public class MainActivity extends AppCompatActivity {
         button_worker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openWorker();
+
+                Intent i = new Intent(MainActivity.this, SecondActivity.class);
+                startActivity(i);
             }
         });
         button_customer= (Button) findViewById(R.id.customer);

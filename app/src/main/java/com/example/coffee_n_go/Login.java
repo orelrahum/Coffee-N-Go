@@ -47,6 +47,7 @@ public class Login extends AppCompatActivity {
             Info.setText("Nomber of attempts remaining: "+ counter);
             if(counter==0){
                 Login.setEnabled(false);
+                //
             }
         }
     }

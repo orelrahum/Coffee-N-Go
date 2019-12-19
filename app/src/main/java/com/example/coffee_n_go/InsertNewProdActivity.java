@@ -10,9 +10,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class InsertNewProdActivity extends AppCompatActivity {
 
@@ -23,6 +28,8 @@ public class InsertNewProdActivity extends AppCompatActivity {
     EditText price;
     EditText quant;
     Button insert;
+    List<String> products = new ArrayList<>();
+    Product p;
 
 
     @Override
@@ -35,6 +42,17 @@ public class InsertNewProdActivity extends AppCompatActivity {
         quant=findViewById(R.id.InsProdQuanEt);
         myDb=FirebaseDatabase.getInstance();
         myRef=myDb.getReference("Products");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                p = dataSnapshot.getValue(Product.class);
+                showData(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
 
 
 
@@ -46,10 +64,21 @@ public class InsertNewProdActivity extends AppCompatActivity {
                 String ProductQuant=quant.getText().toString();
                 String ProductID=myRef.push().getKey();
                 Product p = new Product(ProductID,ProductName,ProductPrice,ProductQuant);
-                myRef.child(ProductID).setValue(p,completionListener);
+                if(products.contains(p.getName()))
+                    Toast.makeText(InsertNewProdActivity.this,"This product is already in!!",Toast.LENGTH_LONG).show();
+                else
+                    myRef.child(ProductID).setValue(p,completionListener);
             }
         });
     }
+
+    private void showData(DataSnapshot dataSnapshot) {
+        for (DataSnapshot ds : dataSnapshot.getChildren()) {
+            p = (ds.getValue(Product.class));
+            products.add(p.getName());
+        }
+    }
+
     DatabaseReference.CompletionListener completionListener = new DatabaseReference.CompletionListener() {
         @Override
         public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {

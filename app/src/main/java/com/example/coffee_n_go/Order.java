@@ -5,10 +5,10 @@ import java.util.ArrayList;
 public class Order {
 
     String OrderID;
-    //ArrayList<String>products;
+    ArrayList<String>products;
     String OrderName;
     String OrderPhone;
-    String myDrink;
+//    String myDrink;
 
     public String getOrderName() {
         return OrderName;
@@ -18,14 +18,14 @@ public class Order {
         return OrderPhone;
     }
 
-    public String getMyDrink() {
-        return myDrink;
+    public ArrayList<String> getMyProd() {
+        return products;
     }
 
-    public Order(String orderName, String orderPhone, String myDrink, String orderid) {
+    public Order(String orderName, String orderPhone, ArrayList<String>myProd, String orderid) {
         OrderName = orderName;
         OrderPhone = orderPhone;
-        this.myDrink = myDrink;
+        products = myProd;
         this.OrderID = orderid;
     }
 }

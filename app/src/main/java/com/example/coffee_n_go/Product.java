@@ -1,11 +1,14 @@
 package com.example.coffee_n_go;
 
 public class Product {
-    private String id;
-    private String name;
-    private String price;
-    private String stocks;
+    private String id="";
+    private String name="test";
+    private String price="";
+    private String stocks="";
 
+    public Product(){
+
+    }
     public Product(String id, String name, String price, String stocks) {
         this.id = id;
         this.name = name;

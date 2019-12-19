@@ -4,28 +4,49 @@ import java.util.ArrayList;
 
 public class Order {
 
-    String OrderID;
-    ArrayList<String>products;
-    String OrderName;
-    String OrderPhone;
-//    String myDrink;
+    private String OrderID;
+    private ArrayList<String>products;
+    private String CustomerName;
+    private String CustomerPhone;
 
-    public String getOrderName() {
-        return OrderName;
+
+    public Order(){}
+    public Order(String orderName, String orderPhone, ArrayList<String>myProd, String orderid) {
+        CustomerName = orderName;
+        CustomerPhone = orderPhone;
+        products = myProd;
+        OrderID = orderid;
     }
 
-    public String getOrderPhone() {
-        return OrderPhone;
+    public String getOrderID() {
+        return OrderID;
     }
 
-    public ArrayList<String> getMyProd() {
+    public void setOrderID(String orderID) {
+        OrderID = orderID;
+    }
+
+    public ArrayList<String> getProducts() {
         return products;
     }
 
-    public Order(String orderName, String orderPhone, ArrayList<String>myProd, String orderid) {
-        OrderName = orderName;
-        OrderPhone = orderPhone;
-        products = myProd;
-        this.OrderID = orderid;
+    public void setProducts(ArrayList<String> products) {
+        this.products = products;
+    }
+
+    public String getCustomerName() {
+        return CustomerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        CustomerName = customerName;
+    }
+
+    public String getCustomerPhone() {
+        return CustomerPhone;
+    }
+
+    public void setCustomerPhone(String customerPhone) {
+        CustomerPhone = customerPhone;
     }
 }

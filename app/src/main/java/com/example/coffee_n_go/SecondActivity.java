@@ -22,7 +22,7 @@ public class SecondActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
         check = findViewById(R.id.testBtn);
-        textView=findViewById(R.id.textView);
+        textView=findViewById(R.id.textView20);
         final ArrayList<Product> prodList = new ArrayList<Product>();
 
         check.setOnClickListener(new View.OnClickListener() {

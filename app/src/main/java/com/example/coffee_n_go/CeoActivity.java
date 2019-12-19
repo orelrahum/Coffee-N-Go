@@ -33,5 +33,19 @@ public class CeoActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+        chnagePricesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(CeoActivity.this,UpdateProductDetails.class);
+                startActivity(intent);
+            }
+        });
+        removeProdBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CeoActivity.this,DeleteProduct.class);
+                startActivity(intent);
+            }
+        });
     }
 }

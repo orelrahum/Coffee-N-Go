@@ -2,7 +2,7 @@ package com.example.coffee_n_go;
 
 public class Product {
     private String id="";
-    private String name="test";
+    private String name="";
     private String price="";
     private String stocks="";
 

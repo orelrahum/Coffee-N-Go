@@ -7,7 +7,7 @@
     tools:context=".SecondActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView20"
         android:layout_width="323dp"
         android:layout_height="197dp"
         android:text="what whould u like to order?"

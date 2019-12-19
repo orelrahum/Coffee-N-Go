@@ -47,7 +47,6 @@ public class CustomerActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 p = dataSnapshot.getValue(Product.class);
                 showData(dataSnapshot);
-                Drink.setText(prodOrder.toString());
             }
 
             @Override
@@ -88,18 +87,18 @@ public class CustomerActivity extends AppCompatActivity {
                                 }
                             }
                         }
+                        Drink.setText(prodOrder.toString());
                     }
                 });
-                mBuilder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+                mBuilder.setNeutralButton("Clear", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         for (boolean bol : arrIsChecked) bol = false;
                         prodOrder.clear();
+                        Drink.setText(prodOrder.toString());
                     }
                 });
-                Drink.setText(prodOrder.toString());
                 mBuilder.show();
-                Drink.setText(prodOrder.toString());
             }
         });
         TakeBtn.setOnClickListener(new View.OnClickListener() {

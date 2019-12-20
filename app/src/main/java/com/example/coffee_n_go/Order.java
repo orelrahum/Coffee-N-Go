@@ -8,14 +8,16 @@ public class Order {
     private ArrayList<String>products;
     private String CustomerName;
     private String CustomerPhone;
+    private Double price;
 
 
     public Order(){}
-    public Order(String orderName, String orderPhone, ArrayList<String>myProd, String orderid) {
+    public Order(String orderName, String orderPhone, ArrayList<String>myProd, String orderid,Double price) {
         CustomerName = orderName;
         CustomerPhone = orderPhone;
         products = myProd;
         OrderID = orderid;
+        this.price=price;
     }
 
     public String getOrderID() {
@@ -48,5 +50,18 @@ public class Order {
 
     public void setCustomerPhone(String customerPhone) {
         CustomerPhone = customerPhone;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public String toString(){
+        String s=getCustomerName()+"\n"+getCustomerPhone()+"\n"+getProducts().toString()+"\n"+getPrice()+"\n"+getOrderID();
+        return s;
     }
 }

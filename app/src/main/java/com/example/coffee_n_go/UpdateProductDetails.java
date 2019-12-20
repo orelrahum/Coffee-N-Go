@@ -17,6 +17,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -27,10 +28,13 @@ public class UpdateProductDetails extends AppCompatActivity {
     Button choose;
     Button update;
     Product p;
+    Product temp;
     EditText name;
     EditText price;
     EditText quantity;
-    String prod;
+    String Pname;
+    String Pprice;
+    String Pquant;
     ArrayList<String> products = new ArrayList<>();
     ArrayList<String>productsId=new ArrayList<>();
     String prodId="";
@@ -50,6 +54,8 @@ public class UpdateProductDetails extends AppCompatActivity {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                products.clear();
+                productsId.clear();
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     p = (ds.getValue(Product.class));
                     productsId.add(p.getId());
@@ -73,9 +79,26 @@ public class UpdateProductDetails extends AppCompatActivity {
                 builder.setSingleChoiceItems(arr, 0, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        prod=products.get(i);
+                        Pname=products.get(i);
                         prodId=productsId.get(i);
-                        choose.setText(prod);
+                        choose.setText(Pname);
+                        myRef.getDatabase().getReference("Products");
+                        Query updateValues=myRef.child(prodId);
+                        updateValues.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                p=dataSnapshot.getValue(Product.class);
+                                Pname=p.getName();
+                                Pprice=p.getPrice();
+                                Pquant=p.getStocks();
+                                temp=new Product(prodId,Pname,Pprice,Pquant);
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
                     }
                 });
                 builder.show();
@@ -88,6 +111,9 @@ public class UpdateProductDetails extends AppCompatActivity {
                 String newName=name.getText().toString();
                 String newPrice=price.getText().toString();
                 String newQant=quantity.getText().toString();
+                if(newName.equals(""))newName=temp.getName();
+                if(newPrice.equals(""))newPrice=temp.getPrice();
+                if(newQant.equals(""))newQant=temp.getStocks();
                 p=new Product(prodId,newName,newPrice,newQant);
                 FirebaseDatabase.getInstance().getReference("Products").child(prodId).setValue(p, complitionListener);
             }
@@ -98,8 +124,13 @@ public class UpdateProductDetails extends AppCompatActivity {
         public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
             if (databaseError != null) {
                 Toast.makeText(UpdateProductDetails.this, databaseError.getMessage(), Toast.LENGTH_LONG).show();
+
             } else {
                 Toast.makeText(UpdateProductDetails.this,"Updated!!",Toast.LENGTH_LONG).show();
+//                productsId.clear();
+//                products.clear();
+                Pname="";
+                choose.setText(Pname);
             }
         }
     };

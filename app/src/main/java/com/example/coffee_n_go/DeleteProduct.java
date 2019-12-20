@@ -19,11 +19,8 @@ import java.util.ArrayList;
 public class DeleteProduct extends AppCompatActivity {
     DatabaseReference myRef;
     FirebaseDatabase myDb;
-    String prodId;
-    ArrayList<String>products=new ArrayList<>();
-    ArrayList<String>productsId=new ArrayList<>();
-    String prod;
-    Product p;
+    ArrayList<Product>products=new ArrayList<>();
+    Product myProd;
     Button choose;
     Button del;
 
@@ -38,10 +35,9 @@ public class DeleteProduct extends AppCompatActivity {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                products.clear();
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    p = (ds.getValue(Product.class));
-                    productsId.add(p.getId());
-                    products.add(p.getName());
+                    products.add(ds.getValue(Product.class));
                 }
             }
 
@@ -56,14 +52,13 @@ public class DeleteProduct extends AppCompatActivity {
                 builder.setTitle("Products:");
                 String[]arr=new String[products.size()];
                 for(int i=0;i<arr.length;i++){
-                    arr[i]=products.get(i);
+                    arr[i]=products.get(i).getName();
                 }
                 builder.setSingleChoiceItems(arr, 0, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        prod=products.get(i);
-                        prodId=productsId.get(i);
-                        choose.setText(prod);
+                        myProd=products.get(i);
+                        choose.setText(myProd.getName());
                     }
                 });
                 builder.show();
@@ -73,7 +68,7 @@ public class DeleteProduct extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 myRef.getDatabase().getReference("Products/");
-                Query deleteQuery = myRef.child(prodId);
+                Query deleteQuery = myRef.child(myProd.getId());
                 deleteQuery.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

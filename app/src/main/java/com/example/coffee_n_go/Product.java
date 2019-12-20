@@ -47,4 +47,8 @@ public class Product {
     public void setStocks(String stocks) {
         this.stocks = stocks;
     }
+
+    public String toString(){
+        return this.getName();
+    }
 }

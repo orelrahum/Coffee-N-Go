@@ -5,19 +5,20 @@ import java.util.ArrayList;
 public class Order {
 
     private String OrderID;
-    private ArrayList<String>products;
+    private ArrayList<String>Products;
     private String CustomerName;
     private String CustomerPhone;
-    private Double price;
-
+    private Double Price;
+    private boolean TakeAway;
 
     public Order(){}
-    public Order(String orderName, String orderPhone, ArrayList<String>myProd, String orderid,Double price) {
+    public Order(String orderName, String orderPhone,boolean takeAway, ArrayList<String>myProd, String orderid,Double price) {
         CustomerName = orderName;
         CustomerPhone = orderPhone;
-        products = myProd;
+        Products = myProd;
         OrderID = orderid;
-        this.price=price;
+        Price=price;
+        TakeAway=takeAway;
     }
 
     public String getOrderID() {
@@ -29,11 +30,11 @@ public class Order {
     }
 
     public ArrayList<String> getProducts() {
-        return products;
+        return Products;
     }
 
     public void setProducts(ArrayList<String> products) {
-        this.products = products;
+        Products = products;
     }
 
     public String getCustomerName() {
@@ -53,15 +54,23 @@ public class Order {
     }
 
     public Double getPrice() {
-        return price;
+        return Price;
     }
 
     public void setPrice(Double price) {
-        this.price = price;
+        Price = price;
     }
 
     public String toString(){
-        String s=getCustomerName()+"\n"+getCustomerPhone()+"\n"+getProducts().toString()+"\n"+getPrice()+"\n"+getOrderID();
+        String s=getCustomerName()+"\n"+getCustomerPhone()+"\nTake Away : "+TakeAway+"\n"+getProducts().toString()+"\n"+getPrice()+"\n"+getOrderID();
         return s;
+    }
+
+    public boolean isTakeAway() {
+        return TakeAway;
+    }
+
+    public void setTakeAway(boolean takeAway) {
+        TakeAway = takeAway;
     }
 }

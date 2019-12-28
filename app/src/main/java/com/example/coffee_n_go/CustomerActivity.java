@@ -27,7 +27,7 @@ public class CustomerActivity extends AppCompatActivity {
     Product p;
     FirebaseDatabase myDataBase;
     Button Drink;
-    Button TakeBtn;
+    Button book;
     List<String> products = new ArrayList<>();
     List<String>productsId=new ArrayList<>();
     ArrayList<String> prodOrder = new ArrayList<>();
@@ -36,18 +36,24 @@ public class CustomerActivity extends AppCompatActivity {
     List<String> prices = new ArrayList<>();
     double sum=0;
     boolean arrIsChecked[];
+    boolean TakeAway=false;
+    double diff=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer);
-        TakeBtn = findViewById(R.id.TakeBtn);
+        book = findViewById(R.id.BookBtn);
         Drink = findViewById(R.id.DrinksBtn);
         nameET = findViewById(R.id.NameFillByUser);
         phone = findViewById(R.id.PhoneFillByUser);
         myDataBase = FirebaseDatabase.getInstance();
         RootRef = myDataBase.getReference();
         RootRef = myDataBase.getReference("Products");
+        Intent intent =getIntent();
+        TakeAway=intent.getBooleanExtra("TakeAway",false);
+        if(!TakeAway)
+            diff=2;
         RootRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -63,7 +69,7 @@ public class CustomerActivity extends AppCompatActivity {
                         products.add(p.getName());
                         productsId.add(p.getId());
                         productsWithPrice.add(p.getName()+"\t"+p.getPrice());
-                        prices.add(p.getPrice());
+                        prices.add(p.getPrice()+"");
                     }
                 }
             }
@@ -76,7 +82,7 @@ public class CustomerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(CustomerActivity.this);
-                mBuilder.setTitle("Drinks:");
+                mBuilder.setTitle("Menu:");
                 arrIsChecked = new boolean[productsWithPrice.size()];
                 String[] arr = new String[productsWithPrice.size()];
                 for (int i = 0; i < productsWithPrice.size(); i++) {
@@ -128,14 +134,14 @@ public class CustomerActivity extends AppCompatActivity {
                 mBuilder.show();
             }
         });
-        TakeBtn.setOnClickListener(new View.OnClickListener() {
+        book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 RootRef.child("Orders");
                 String UserName = nameET.getText().toString();
                 String Userphone = phone.getText().toString();
                 String Orderid = RootRef.push().getKey();
-                Order o = new Order(UserName, Userphone, prodOrder, Orderid,sum);
+                Order o = new Order(UserName, Userphone,TakeAway, prodOrder, Orderid,sum);
                 FirebaseDatabase.getInstance().getReference("Orders").child(Orderid).setValue(o, complitionListener);
             }
         });
@@ -158,7 +164,7 @@ public class CustomerActivity extends AppCompatActivity {
                             String Pname=p.getName();
                             String Pid=p.getId();
                             String Pquant="" +(Integer.parseInt(p.getStocks())-1);
-                            String Pprice=p.getPrice();
+                            String Pprice=p.getPrice()+"";
                             p=new Product(Pid,Pname,Pprice,Pquant);
                             RootRef.child(Pid).setValue(p);
                         }

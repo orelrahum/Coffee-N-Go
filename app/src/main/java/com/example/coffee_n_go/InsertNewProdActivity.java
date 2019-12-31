@@ -28,7 +28,7 @@ public class InsertNewProdActivity extends AppCompatActivity {
     EditText price;
     EditText quant;
     Button insert;
-    List<String> products = new ArrayList<>();
+    List<Product> products = new ArrayList<>();
     Product p;
 
 
@@ -75,7 +75,7 @@ public class InsertNewProdActivity extends AppCompatActivity {
     private void showData(DataSnapshot dataSnapshot) {
         for (DataSnapshot ds : dataSnapshot.getChildren()) {
             p = (ds.getValue(Product.class));
-            products.add(p.getName());
+            products.add(p);
         }
     }
 

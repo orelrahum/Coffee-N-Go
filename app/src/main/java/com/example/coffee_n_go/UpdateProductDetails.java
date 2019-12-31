@@ -35,8 +35,7 @@ public class UpdateProductDetails extends AppCompatActivity {
     String Pname;
     String Pprice;
     String Pquant;
-    ArrayList<String> products = new ArrayList<>();
-    ArrayList<String>productsId=new ArrayList<>();
+    ArrayList<Product> products = new ArrayList<>();
     String prodId="";
 
     @Override
@@ -55,11 +54,9 @@ public class UpdateProductDetails extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 products.clear();
-                productsId.clear();
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     p = (ds.getValue(Product.class));
-                    productsId.add(p.getId());
-                    products.add(p.getName());
+                    products.add(p);
                 }
             }
 
@@ -74,13 +71,13 @@ public class UpdateProductDetails extends AppCompatActivity {
                 builder.setTitle("Products:");
                 String[]arr=new String[products.size()];
                 for(int i=0;i<arr.length;i++){
-                    arr[i]=products.get(i);
+                    arr[i]=products.get(i).getName();
                 }
                 builder.setSingleChoiceItems(arr, 0, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Pname=products.get(i);
-                        prodId=productsId.get(i);
+                        Pname=products.get(i).getName();
+                        prodId=products.get(i).getId();
                         choose.setText(Pname);
                         myRef.getDatabase().getReference("Products");
                         Query updateValues=myRef.child(prodId);
@@ -127,8 +124,6 @@ public class UpdateProductDetails extends AppCompatActivity {
 
             } else {
                 Toast.makeText(UpdateProductDetails.this,"Updated!!",Toast.LENGTH_LONG).show();
-//                productsId.clear();
-//                products.clear();
                 Pname="";
                 choose.setText(Pname);
             }

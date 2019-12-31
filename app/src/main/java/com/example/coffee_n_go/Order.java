@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Order {
 
     private String OrderID;
-    private ArrayList<String>Products;
+    private ArrayList<Product>Products;
     private String CustomerName;
     private String CustomerPhone;
     private Double Price;
@@ -13,7 +13,7 @@ public class Order {
     private String Status;
 
     public Order(){}
-    public Order(String orderName, String orderPhone,boolean takeAway, ArrayList<String>myProd, String orderid,Double price,String status) {
+    public Order(String orderName, String orderPhone,boolean takeAway, ArrayList<Product>myProd, String orderid,Double price,String status) {
         CustomerName = orderName;
         CustomerPhone = orderPhone;
         Products = myProd;
@@ -31,11 +31,11 @@ public class Order {
         OrderID = orderID;
     }
 
-    public ArrayList<String> getProducts() {
+    public ArrayList<Product> getProducts() {
         return Products;
     }
 
-    public void setProducts(ArrayList<String> products) {
+    public void setProducts(ArrayList<Product> products) {
         Products = products;
     }
 

@@ -63,7 +63,7 @@ public class InsertNewProdActivity extends AppCompatActivity {
                 String ProductPrice=price.getText().toString();
                 String ProductQuant=quant.getText().toString();
                 String ProductID=myRef.push().getKey();
-                Product p = new Product(ProductID,ProductName,ProductPrice,ProductQuant);
+                Product p = new Product(ProductID,ProductName,Double.parseDouble(ProductPrice),Integer.parseInt(ProductQuant));
                 if(products.contains(p.getName()))
                     Toast.makeText(InsertNewProdActivity.this,"This product is already in!!",Toast.LENGTH_LONG).show();
                 else

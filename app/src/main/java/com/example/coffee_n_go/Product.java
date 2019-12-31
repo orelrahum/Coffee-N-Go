@@ -3,13 +3,13 @@ package com.example.coffee_n_go;
 public class Product {
     private String id="";
     private String name="";
-    private String price="";
-    private String stocks="";
+    private double price;
+    private int stocks;
 
     public Product(){
 
     }
-    public Product(String id, String name, String price, String stocks) {
+    public Product(String id, String name, double price, int stocks) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -32,19 +32,19 @@ public class Product {
         this.name = name;
     }
 
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public String getStocks() {
+    public int getStocks() {
         return stocks;
     }
 
-    public void setStocks(String stocks) {
+    public void setStocks(int stocks) {
         this.stocks = stocks;
     }
 

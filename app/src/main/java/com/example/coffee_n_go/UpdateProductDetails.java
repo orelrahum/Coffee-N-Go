@@ -33,8 +33,8 @@ public class UpdateProductDetails extends AppCompatActivity {
     EditText price;
     EditText quantity;
     String Pname;
-    String Pprice;
-    String Pquant;
+    double Pprice;
+    int Pquant;
     ArrayList<Product> products = new ArrayList<>();
     String prodId="";
 
@@ -109,9 +109,9 @@ public class UpdateProductDetails extends AppCompatActivity {
                 String newPrice=price.getText().toString();
                 String newQant=quantity.getText().toString();
                 if(newName.equals(""))newName=temp.getName();
-                if(newPrice.equals(""))newPrice=temp.getPrice();
-                if(newQant.equals(""))newQant=temp.getStocks();
-                p=new Product(prodId,newName,newPrice,newQant);
+                if(newPrice.equals(""))newPrice=temp.getPrice()+"";
+                if(newQant.equals(""))newQant=temp.getStocks()+"";
+                p=new Product(prodId,newName,Double.parseDouble(newPrice),Integer.parseInt(newQant));
                 FirebaseDatabase.getInstance().getReference("Products").child(prodId).setValue(p, complitionListener);
             }
         });

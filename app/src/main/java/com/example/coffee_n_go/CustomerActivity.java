@@ -57,7 +57,7 @@ public class CustomerActivity extends AppCompatActivity {
                 p = dataSnapshot.getValue(Product.class);
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     p = (ds.getValue(Product.class));
-                    int stock = Integer.parseInt(p.getStocks());
+                    int stock = p.getStocks();
                     if (stock > 0) {
                         products.add(p);
                     }
@@ -76,7 +76,7 @@ public class CustomerActivity extends AppCompatActivity {
                 arrIsChecked = new boolean[products.size()];
                 String[] arr = new String[products.size()];
                 for (int i = 0; i < products.size(); i++) {
-                    arr[i] = products.get(i).getName()+"\t"+products.get(i).getPrice();
+                    arr[i] = products.get(i).getName()+"\t"+(products.get(i).getPrice()+diff);
                 }
                 mBuilder.setMultiChoiceItems(arr, arrIsChecked, new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
@@ -94,12 +94,12 @@ public class CustomerActivity extends AppCompatActivity {
                                 if (arrIsChecked[j]) {
                                     if (!prodOrder.contains(products.get(j))) {
                                         prodOrder.add(products.get(j));
-                                        sum+=Double.parseDouble(products.get(j).getPrice());
+                                        sum+=products.get(j).getPrice()+diff;
                                     }
                                 } else {
                                     if (prodOrder.contains(products.get(j))) {
                                         prodOrder.remove(products.get(j));
-                                        sum-=Double.parseDouble(products.get(j).getPrice());
+                                        sum-=products.get(j).getPrice()+diff;
                                     }
                                 }
                             }
@@ -149,8 +149,8 @@ public class CustomerActivity extends AppCompatActivity {
                             p=dataSnapshot.getValue(Product.class);
                             String Pname=p.getName();
                             String Pid=p.getId();
-                            String Pquant="" +(Integer.parseInt(p.getStocks())-1);
-                            String Pprice=p.getPrice()+"";
+                            int Pquant=p.getStocks()-1;
+                            double Pprice=p.getPrice();
                             p=new Product(Pid,Pname,Pprice,Pquant);
                             RootRef.child(Pid).setValue(p);
                         }

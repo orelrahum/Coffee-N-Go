@@ -10,15 +10,17 @@ public class Order {
     private String CustomerPhone;
     private Double Price;
     private boolean TakeAway;
+    private String Status;
 
     public Order(){}
-    public Order(String orderName, String orderPhone,boolean takeAway, ArrayList<String>myProd, String orderid,Double price) {
+    public Order(String orderName, String orderPhone,boolean takeAway, ArrayList<String>myProd, String orderid,Double price,String status) {
         CustomerName = orderName;
         CustomerPhone = orderPhone;
         Products = myProd;
         OrderID = orderid;
         Price=price;
         TakeAway=takeAway;
+        Status=status;
     }
 
     public String getOrderID() {
@@ -62,7 +64,7 @@ public class Order {
     }
 
     public String toString(){
-        String s=getCustomerName()+"\n"+getCustomerPhone()+"\nTake Away : "+TakeAway+"\n"+getProducts().toString()+"\n"+getPrice()+"\n"+getOrderID();
+        String s=getCustomerName()+"\n"+getCustomerPhone()+"\nTake Away : "+TakeAway+"\n"+"\nStatus: "+getStatus()+"\n"+getProducts().toString()+"\n"+getPrice()+"\n";
         return s;
     }
 
@@ -72,5 +74,13 @@ public class Order {
 
     public void setTakeAway(boolean takeAway) {
         TakeAway = takeAway;
+    }
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String status) {
+        Status = status;
     }
 }

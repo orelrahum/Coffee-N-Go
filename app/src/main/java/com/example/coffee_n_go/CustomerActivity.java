@@ -141,7 +141,7 @@ public class CustomerActivity extends AppCompatActivity {
                 String UserName = nameET.getText().toString();
                 String Userphone = phone.getText().toString();
                 String Orderid = RootRef.push().getKey();
-                Order o = new Order(UserName, Userphone,TakeAway, prodOrder, Orderid,sum);
+                Order o = new Order(UserName, Userphone,TakeAway, prodOrder, Orderid,sum,"not served");
                 FirebaseDatabase.getInstance().getReference("Orders").child(Orderid).setValue(o, complitionListener);
             }
         });

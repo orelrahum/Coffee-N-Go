@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -21,6 +22,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class UpdateProductDetails extends AppCompatActivity {
     DatabaseReference myRef;
@@ -32,6 +34,7 @@ public class UpdateProductDetails extends AppCompatActivity {
     EditText name;
     EditText price;
     EditText quantity;
+    TextView aboutEnd;
     String Pname;
     double Pprice;
     int Pquant;
@@ -42,7 +45,12 @@ public class UpdateProductDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_product_details);
-
+        aboutEnd=findViewById(R.id.aboutToEndET);
+//        try {
+            Intent intent =getIntent();
+            String s=intent.getStringExtra("extra");
+            aboutEnd.setText(s);
+//        }catch (Exception e){}
         choose = findViewById(R.id.ChooseUpdateBtn);
         update = findViewById(R.id.UpdateBtn);
         name = findViewById(R.id.UpdateNameEt);

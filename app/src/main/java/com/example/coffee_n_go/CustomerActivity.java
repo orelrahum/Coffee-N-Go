@@ -6,6 +6,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -116,7 +117,10 @@ public class CustomerActivity extends AppCompatActivity {
                         sum=0;
                     }
                 });
-                mBuilder.show();
+                AlertDialog dialog =mBuilder.create();
+                dialog.show();
+                dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(Color.parseColor("#000000"));
+                dialog.getButton(DialogInterface.BUTTON_NEUTRAL).setTextColor(Color.parseColor("#000000"));
             }
         });
         book.setOnClickListener(new View.OnClickListener() {

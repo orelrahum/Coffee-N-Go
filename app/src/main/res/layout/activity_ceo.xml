@@ -42,18 +42,28 @@
 
     <Button
         android:id="@+id/RemoveProductBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="168dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="127dp"
-        android:layout_marginEnd="137dp"
-        android:layout_marginBottom="372dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginEnd="226dp"
+        android:layout_marginBottom="377dp"
         android:text="Remove product"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.464"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/CreateNewWorkerBtn"
+        android:layout_width="192dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="305dp"
+        android:layout_marginEnd="24dp"
+        android:text="create new worker profile" />
 </RelativeLayout>

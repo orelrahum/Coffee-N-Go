@@ -13,6 +13,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,9 +26,11 @@ public class CeoActivity extends AppCompatActivity {
     Button chnagePricesBtn;
     Button newProdBtn;
     Button removeProdBtn;
+    Button insertNewWorker;
     ArrayList<String>almostEnd=new ArrayList<>();
     DatabaseReference myRef;
     FirebaseDatabase myDb;
+    int minStackToAlert=15;
 
 
     @Override
@@ -38,6 +42,7 @@ public class CeoActivity extends AppCompatActivity {
         chnagePricesBtn=findViewById(R.id.changePricesBtn);
         newProdBtn=findViewById(R.id.insertProductsBtn);
         removeProdBtn=findViewById(R.id.RemoveProductBtn);
+        insertNewWorker=findViewById(R.id.CreateNewWorkerBtn);
 
         myDb=FirebaseDatabase.getInstance();
         myRef=myDb.getReference("Products");
@@ -46,7 +51,7 @@ public class CeoActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     Product p = (ds.getValue(Product.class));
-                    if(p.getStocks()<15)
+                    if(p.getStocks()<minStackToAlert)
                         almostEnd.add(p.getName());
                 }
                 if(almostEnd.size()>0){
@@ -102,6 +107,12 @@ public class CeoActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(CeoActivity.this,DeleteProduct.class);
                 startActivity(intent);
+            }
+        });
+        insertNewWorker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(CeoActivity.this, "Create New Worker", Toast.LENGTH_LONG).show();
             }
         });
     }

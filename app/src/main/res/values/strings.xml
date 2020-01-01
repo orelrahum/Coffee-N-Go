@@ -9,19 +9,5 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
-
-
-    <string-array name="Coffie_Drinks">
-        <item>הפוך</item>
-        <item>מאג</item>
-        <item>מקיאטו</item>
-        <item>לאטה</item>
-        <item>שוקו</item>
-        <item>קפה שחור</item>
-        <item>אמריקנו</item>
-        <item>אספרסו</item>
-        <item>תה</item>
-        <item>סיידר</item>
-        <item>סחלב</item>
-    </string-array>
+    
 </resources>

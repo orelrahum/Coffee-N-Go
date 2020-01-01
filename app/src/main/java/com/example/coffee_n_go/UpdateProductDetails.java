@@ -46,11 +46,9 @@ public class UpdateProductDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_product_details);
         aboutEnd=findViewById(R.id.aboutToEndET);
-//        try {
             Intent intent =getIntent();
             String s=intent.getStringExtra("extra");
             aboutEnd.setText(s);
-//        }catch (Exception e){}
         choose = findViewById(R.id.ChooseUpdateBtn);
         update = findViewById(R.id.UpdateBtn);
         name = findViewById(R.id.UpdateNameEt);

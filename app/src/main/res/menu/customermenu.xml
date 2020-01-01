@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="Clear"
+        android:id="@+id/clearMenu"/>
+
+
+    <item
+        android:title="Seat"
+        android:id="@+id/seatMenu"/>
+
+
+    <item
+        android:title="Take"
+        android:id="@+id/takeMenu"/>
+
+
+</menu>

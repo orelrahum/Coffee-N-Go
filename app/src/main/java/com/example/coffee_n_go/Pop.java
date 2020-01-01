@@ -21,7 +21,6 @@ public class Pop extends Activity {
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-//        double sum=getIntent().getParcelableExtra("Sum");
         price.setText(price.getText()+""+sum);
         getWindow().setLayout((int) (width),(int)(height));
     }

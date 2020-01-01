@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="Insert new product"
+        android:id="@+id/insertProductsMenu"/>
+
+
+    <item
+        android:title="Delete product"
+        android:id="@+id/DeleteProdMenu"/>
+
+
+    <item
+        android:title="Update Product details"
+        android:id="@+id/UpdateProdMenu"/>
+
+    <item
+        android:title="Crete new worker"
+        android:id="@+id/CreateNewWorker"/>
+
+
+</menu>

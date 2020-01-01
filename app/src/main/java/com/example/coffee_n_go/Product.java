@@ -1,20 +1,24 @@
 package com.example.coffee_n_go;
 
-
 public class Product {
+    public enum types{
+        Drinks,Food,Snacks;
+    }
     private String id="";
     private String name="";
     private double price;
     private int stocks;
+    private types type;
 
     public Product(){
 
     }
-    public Product(String id, String name, double price, int stocks) {
+    public Product(String id, String name, double price, int stocks,types type) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.stocks = stocks;
+        this.type=type;
     }
 
     public String getId() {
@@ -52,4 +56,8 @@ public class Product {
     public String toString(){
         return this.getName();
     }
+
+    public types getType() { return type; }
+
+    public void setType(types type) { this.type = type; }
 }

@@ -35,11 +35,13 @@ public class UpdateProductDetails extends AppCompatActivity {
     EditText price;
     EditText quantity;
     TextView aboutEnd;
+    Button chooseType;
     String Pname;
     double Pprice;
     int Pquant;
     ArrayList<Product> products = new ArrayList<>();
     String prodId="";
+    Product.types selectedType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +56,10 @@ public class UpdateProductDetails extends AppCompatActivity {
         name = findViewById(R.id.UpdateNameEt);
         price = findViewById(R.id.UpdatePriceEt);
         quantity = findViewById(R.id.UpdateQuantEt);
+        chooseType=findViewById(R.id.UpdateProdChooseTypeBtn);
         myDb = FirebaseDatabase.getInstance();
         myRef = myDb.getReference("Products");
+        final Product.types[] possibleValues = Product.types.values();
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -94,7 +98,7 @@ public class UpdateProductDetails extends AppCompatActivity {
                                 Pname=p.getName();
                                 Pprice=p.getPrice();
                                 Pquant=p.getStocks();
-                                temp=new Product(prodId,Pname,Pprice,Pquant);
+                                temp=new Product(prodId,Pname,Pprice,Pquant,p.getType());
                             }
 
                             @Override
@@ -114,11 +118,32 @@ public class UpdateProductDetails extends AppCompatActivity {
                 String newName=name.getText().toString();
                 String newPrice=price.getText().toString();
                 String newQant=quantity.getText().toString();
+                String newType=chooseType.getText().toString();
                 if(newName.equals(""))newName=temp.getName();
                 if(newPrice.equals(""))newPrice=temp.getPrice()+"";
                 if(newQant.equals(""))newQant=temp.getStocks()+"";
-                p=new Product(prodId,newName,Double.parseDouble(newPrice),Integer.parseInt(newQant));
+                if(newType.equals(""))newType=temp.getType()+"";
+                p=new Product(prodId,newName,Double.parseDouble(newPrice),Integer.parseInt(newQant),Product.types.valueOf(newType));
                 FirebaseDatabase.getInstance().getReference("Products").child(prodId).setValue(p, complitionListener);
+            }
+        });
+        chooseType.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(UpdateProductDetails.this);
+                builder.setTitle("Types:");
+                String[]arr=new String[possibleValues.length];
+                for(int i=0;i<arr.length;i++){
+                    arr[i]=possibleValues[i].toString();
+                }
+                builder.setSingleChoiceItems(arr, 0, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                selectedType = possibleValues[i];
+                                chooseType.setText(selectedType.toString());
+                            }
+                        });
+                builder.show();
             }
         });
     }

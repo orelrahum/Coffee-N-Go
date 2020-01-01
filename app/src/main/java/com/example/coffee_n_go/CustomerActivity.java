@@ -163,7 +163,7 @@ public class CustomerActivity extends AppCompatActivity {
                             String Pid = p.getId();
                             int Pquant = p.getStocks() - 1;
                             double Pprice = p.getPrice();
-                            p = new Product(Pid, Pname, Pprice, Pquant);
+                            p = new Product(Pid, Pname, Pprice, Pquant,p.getType());
                             RootRef.child(Pid).setValue(p);
                         }
 

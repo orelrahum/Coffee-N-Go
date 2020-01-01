@@ -30,6 +30,7 @@ public class InsertNewProdActivity extends AppCompatActivity {
     Button insert;
     List<Product> products = new ArrayList<>();
     Product p;
+    Button chooseType;
 
 
     @Override
@@ -40,6 +41,7 @@ public class InsertNewProdActivity extends AppCompatActivity {
         name=findViewById(R.id.InsProdNameEt);
         price=findViewById(R.id.InsProdPriceEt);
         quant=findViewById(R.id.InsProdQuanEt);
+        chooseType=findViewById(R.id.typesBtn);
         myDb=FirebaseDatabase.getInstance();
         myRef=myDb.getReference("Products");
         myRef.addValueEventListener(new ValueEventListener() {
@@ -63,7 +65,9 @@ public class InsertNewProdActivity extends AppCompatActivity {
                 String ProductPrice=price.getText().toString();
                 String ProductQuant=quant.getText().toString();
                 String ProductID=myRef.push().getKey();
-                Product p = new Product(ProductID,ProductName,Double.parseDouble(ProductPrice),Integer.parseInt(ProductQuant));
+                String type=chooseType.getText().toString();
+                Product.types Type=Product.types.valueOf(type);
+                Product p = new Product(ProductID,ProductName,Double.parseDouble(ProductPrice),Integer.parseInt(ProductQuant),Type);
                 if(products.contains(p.getName()))
                     Toast.makeText(InsertNewProdActivity.this,"This product is already in!!",Toast.LENGTH_LONG).show();
                 else

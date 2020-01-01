@@ -5,7 +5,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -16,7 +15,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,9 +31,14 @@ public class CustomerActivity extends AppCompatActivity {
     Product p;
     FirebaseDatabase myDataBase;
     Button Drink;
+    Button Food;
+    Button Snack;
     Button book;
     List<Product> products = new ArrayList<>();
-    ArrayList<Product> prodOrder = new ArrayList<>();
+    ArrayList<Product> productsOrder = new ArrayList<>();
+    ArrayList<Product>drinksOrder=new ArrayList<>();
+    ArrayList<Product>foodsOrder=new ArrayList<>();
+    ArrayList<Product>snacksOrder=new ArrayList<>();
     double sum = 0;
     boolean arrIsChecked[];
     boolean TakeAway = false;
@@ -47,6 +50,8 @@ public class CustomerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_customer);
         book = findViewById(R.id.BookBtn);
         Drink = findViewById(R.id.DrinksBtn);
+        Snack = findViewById(R.id.snacksBtn);
+        Food = findViewById(R.id.foodsBtn);
         nameET = findViewById(R.id.NameFillByUser);
         phone = findViewById(R.id.PhoneFillByUser);
         myDataBase = FirebaseDatabase.getInstance();
@@ -81,17 +86,22 @@ public class CustomerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(CustomerActivity.this);
-                mBuilder.setTitle("Menu:");
-                arrIsChecked = new boolean[products.size()];
-                String[] arr = new String[products.size()];
-                for (int i = 0; i < products.size(); i++) {
-                    arr[i] = products.get(i).getName() + "\t" + (products.get(i).getPrice() + diff);
+                mBuilder.setTitle("Drinks:");
+                final ArrayList<Product>drinks=new ArrayList<>();
+                for(Product product : products){
+                    if(product.getType().equals(Product.types.Drinks))
+                        drinks.add(product);
+                }
+                arrIsChecked = new boolean[drinks.size()];
+                String[] arr = new String[drinks.size()];
+                for (int i = 0; i < drinks.size(); i++) {
+                    arr[i] = drinks.get(i).getName() + "\t" + (drinks.get(i).getPrice() + diff);
                 }
                 mBuilder.setMultiChoiceItems(arr, arrIsChecked, new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int which, boolean isChecked) {
                         arrIsChecked[which] = isChecked;
-                        String currentItem = products.get(which).getName();
+                        String currentItem = drinks.get(which).getName();
                         Toast.makeText(CustomerActivity.this, currentItem + " " + isChecked, Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -101,27 +111,94 @@ public class CustomerActivity extends AppCompatActivity {
                         for (int j = 0; j < arrIsChecked.length; j++) {
                             {
                                 if (arrIsChecked[j]) {
-                                    if (!prodOrder.contains(products.get(j))) {
-                                        prodOrder.add(products.get(j));
-                                        sum += products.get(j).getPrice() + diff;
+                                    if (!productsOrder.contains(drinks.get(j))) {
+                                        productsOrder.add(drinks.get(j));
+                                        drinksOrder.add(drinks.get(j));
+                                        sum += drinks.get(j).getPrice() + diff;
                                     }
                                 } else {
-                                    if (prodOrder.contains(products.get(j))) {
-                                        prodOrder.remove(products.get(j));
-                                        sum -= products.get(j).getPrice() + diff;
+                                    if (productsOrder.contains(drinks.get(j))) {
+                                        productsOrder.remove(drinks.get(j));
+                                        drinksOrder.remove(drinks.get(j));
+                                        sum -= drinks.get(j).getPrice() + diff;
                                     }
                                 }
                             }
                         }
-                        Drink.setText(prodOrder.toString());
+                        Drink.setText(drinksOrder.toString());
                     }
                 });
                 mBuilder.setNeutralButton("Clear", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         for (boolean bol : arrIsChecked) bol = false;
-                        prodOrder.clear();
-                        Drink.setText(prodOrder.toString());
+                        productsOrder.removeAll(drinksOrder);
+                        drinksOrder.clear();
+                        Drink.setText("Choose");
+                        sum = 0;
+                    }
+                });
+                AlertDialog dialog = mBuilder.create();
+                dialog.show();
+                dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(Color.parseColor("#000000"));
+                dialog.getButton(DialogInterface.BUTTON_NEUTRAL).setTextColor(Color.parseColor("#000000"));
+
+            }
+        });
+        Food.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(CustomerActivity.this);
+                mBuilder.setTitle("Foods:");
+                final ArrayList<Product>foods=new ArrayList<>();
+                for(Product product : products){
+                    if(product.getType().equals(Product.types.Food))
+                        foods.add(product);
+                }
+                arrIsChecked = new boolean[foods.size()];
+                String[] arr = new String[foods.size()];
+                for (int i = 0; i < foods.size(); i++) {
+                    arr[i] = foods.get(i).getName() + "\t" + (foods.get(i).getPrice() + diff);
+                }
+                mBuilder.setMultiChoiceItems(arr, arrIsChecked, new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which, boolean isChecked) {
+                        arrIsChecked[which] = isChecked;
+                        String currentItem = foods.get(which).getName();
+                        Toast.makeText(CustomerActivity.this, currentItem + " " + isChecked, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                mBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        for (int j = 0; j < arrIsChecked.length; j++) {
+                            {
+                                if (arrIsChecked[j]) {
+                                    if (!productsOrder.contains(foods.get(j))) {
+                                        productsOrder.add(foods.get(j));
+                                        foodsOrder.add(foods.get(j));
+                                        sum += foods.get(j).getPrice() + diff;
+                                    }
+                                } else {
+                                    if (productsOrder.contains(foods.get(j))) {
+                                        productsOrder.remove(foods.get(j));
+                                        foodsOrder.remove(foods.get(j));
+                                        sum -= foods.get(j).getPrice() + diff;
+
+                                    }
+                                }
+                            }
+                        }
+                        Food.setText(foodsOrder.toString());
+                    }
+                });
+                mBuilder.setNeutralButton("Clear", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        for (boolean bol : arrIsChecked) bol = false;
+                        productsOrder.removeAll(foodsOrder);
+                        foodsOrder.clear();
+                        Food.setText("Choose");
                         sum = 0;
                     }
                 });
@@ -131,6 +208,70 @@ public class CustomerActivity extends AppCompatActivity {
                 dialog.getButton(DialogInterface.BUTTON_NEUTRAL).setTextColor(Color.parseColor("#000000"));
             }
         });
+        Snack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(CustomerActivity.this);
+                mBuilder.setTitle("Snacks:");
+                final ArrayList<Product>snacks=new ArrayList<>();
+                for(Product product : products){
+                    if(product.getType().equals(Product.types.Snacks))
+                        snacks.add(product);
+                }
+                arrIsChecked = new boolean[snacks.size()];
+                String[] arr = new String[snacks.size()];
+                for (int i = 0; i < snacks.size(); i++) {
+                    arr[i] = snacks.get(i).getName() + "\t" + (snacks.get(i).getPrice() + diff);
+                }
+                mBuilder.setMultiChoiceItems(arr, arrIsChecked, new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which, boolean isChecked) {
+                        arrIsChecked[which] = isChecked;
+                        String currentItem = snacks.get(which).getName();
+                        Toast.makeText(CustomerActivity.this, currentItem + " " + isChecked, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                mBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        for (int j = 0; j < arrIsChecked.length; j++) {
+                            {
+                                if (arrIsChecked[j]) {
+                                    if (!productsOrder.contains(snacks.get(j))) {
+                                        productsOrder.add(snacks.get(j));
+                                        snacksOrder.add(snacks.get(j));
+                                        sum += snacks.get(j).getPrice() + diff;
+                                    }
+                                } else {
+                                    if (productsOrder.contains(snacks.get(j))) {
+                                        productsOrder.remove(snacks.get(j));
+                                        snacksOrder.remove(snacks.get(j));
+                                        sum -= snacks.get(j).getPrice() + diff;
+
+                                    }
+                                }
+                            }
+                        }
+                        Snack.setText(snacksOrder.toString());
+                    }
+                });
+                mBuilder.setNeutralButton("Clear", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        for (boolean bol : arrIsChecked) bol = false;
+                        productsOrder.removeAll(snacksOrder);
+                        snacksOrder.clear();
+                        Snack.setText("Choose");
+                        sum = 0;
+                    }
+                });
+                AlertDialog dialog = mBuilder.create();
+                dialog.show();
+                dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(Color.parseColor("#000000"));
+                dialog.getButton(DialogInterface.BUTTON_NEUTRAL).setTextColor(Color.parseColor("#000000"));
+
+            }
+        });
         book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -138,11 +279,10 @@ public class CustomerActivity extends AppCompatActivity {
                 String UserName = nameET.getText().toString();
                 String Userphone = phone.getText().toString();
                 String Orderid = RootRef.push().getKey();
-                Order o = new Order(UserName, Userphone, TakeAway, prodOrder, Orderid, sum, "not served");
+                Order o = new Order(UserName, Userphone, TakeAway, productsOrder, Orderid, sum, "not served");
                 FirebaseDatabase.getInstance().getReference("Orders").child(Orderid).setValue(o, complitionListener);
             }
         });
-        Drink.setText(prodOrder.toString());
     }
 
     DatabaseReference.CompletionListener complitionListener = new DatabaseReference.CompletionListener() {
@@ -151,7 +291,7 @@ public class CustomerActivity extends AppCompatActivity {
             if (databaseError != null) {
                 Toast.makeText(CustomerActivity.this, databaseError.getMessage(), Toast.LENGTH_LONG).show();
             } else {
-                for (Product product : products) {
+                for (Product product : productsOrder) {
                     String str = product.getId();
                     RootRef.getDatabase().getReference("Products");
                     Query updateQuantity = RootRef.child(str);
@@ -176,9 +316,16 @@ public class CustomerActivity extends AppCompatActivity {
                 Intent intent = new Intent(CustomerActivity.this, Pop.class);
                 intent.putExtra("sum", sum);
                 startActivity(intent);
-                prodOrder.clear();
                 products.clear();
-                Drink.setText(prodOrder.toString());
+                productsOrder.clear();
+                drinksOrder.clear();
+                foodsOrder.clear();
+                snacksOrder.clear();
+                nameET.setText("");
+                phone.setText("");
+                Drink.setText("Choose");
+                Food.setText("Choose");
+                Snack.setText("Choose");
                 sum = 0;
             }
         }
@@ -211,8 +358,13 @@ public class CustomerActivity extends AppCompatActivity {
         else if (id == R.id.clearMenu) {
             nameET.setText("");
             phone.setText("");
-            prodOrder.clear();
-            Drink.setText(prodOrder.toString());
+            productsOrder.clear();
+            Drink.setText("Choose");
+            Food.setText("Choose");
+            Snack.setText("Choose");
+            snacksOrder.clear();
+            foodsOrder.clear();
+            drinksOrder.clear();
             Toast.makeText(CustomerActivity.this, "Clear", Toast.LENGTH_SHORT).show();
         }
         return true;

@@ -2,8 +2,10 @@ package com.example.coffee_n_go;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -31,6 +33,7 @@ public class InsertNewProdActivity extends AppCompatActivity {
     List<Product> products = new ArrayList<>();
     Product p;
     Button chooseType;
+    Product.types selectedType;
 
 
     @Override
@@ -42,6 +45,7 @@ public class InsertNewProdActivity extends AppCompatActivity {
         price=findViewById(R.id.InsProdPriceEt);
         quant=findViewById(R.id.InsProdQuanEt);
         chooseType=findViewById(R.id.typesBtn);
+        final Product.types[] possibleValues = Product.types.values();
         myDb=FirebaseDatabase.getInstance();
         myRef=myDb.getReference("Products");
         myRef.addValueEventListener(new ValueEventListener() {
@@ -74,6 +78,25 @@ public class InsertNewProdActivity extends AppCompatActivity {
                     myRef.child(ProductID).setValue(p,completionListener);
             }
         });
+        chooseType.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(InsertNewProdActivity.this);
+                builder.setTitle("Types:");
+                String[]arr=new String[possibleValues.length];
+                for(int i=0;i<arr.length;i++){
+                    arr[i]=possibleValues[i].toString();
+                }
+                builder.setSingleChoiceItems(arr, 0, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        selectedType = possibleValues[i];
+                        chooseType.setText(selectedType.toString());
+                    }
+                });
+                builder.show();
+        };
+    });
     }
 
     private void showData(DataSnapshot dataSnapshot) {

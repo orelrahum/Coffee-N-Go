@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -69,24 +70,32 @@ public class InsertNewProdActivity extends AppCompatActivity {
         insert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String ProductName=name.getText().toString();
-                String ProductPrice=price.getText().toString();
-                String ProductQuant=quant.getText().toString();
-                String ProductID=myRef.push().getKey();
-                String type=chooseType.getText().toString();
-                try {
-                    Product.types Type = Product.types.valueOf(type);
-                    Product p = new Product(ProductID,ProductName,Double.parseDouble(ProductPrice),Integer.parseInt(ProductQuant),Type);
-                    if(products.contains(p.getName()))
-                        Toast.makeText(InsertNewProdActivity.this,"This product is already in!!",Toast.LENGTH_LONG).show();
-                    if(ProductPrice==""|ProductName==""|ProductQuant==""|type==""){
-                        Toast.makeText(InsertNewProdActivity.this,"Please fill all!!",Toast.LENGTH_LONG).show();
-                    }
-                    else
-                        myRef.child(ProductID).setValue(p,completionListener);
-                }catch (Exception e){
-                    Toast.makeText(InsertNewProdActivity.this,"Unable to insert this product,check if this product already in and fill all the details!!",Toast.LENGTH_LONG).show();
+                String ProductName = name.getText().toString();
+                String ProductPrice = price.getText().toString();
+                String ProductQuant = quant.getText().toString();
+                String ProductID = myRef.push().getKey();
+                if (products.contains(p.getName()))
+                    Toast.makeText(InsertNewProdActivity.this, "This product is already in!!", Toast.LENGTH_LONG).show();
+                if (TextUtils.isEmpty(ProductName)) {
+                    name.setError("You must enter name!");
+                    return;
                 }
+                if (TextUtils.isEmpty(ProductPrice)) {
+                    price.setError("You must enter price!");
+                    return;
+                }
+                if (TextUtils.isEmpty(ProductQuant)) {
+                    quant.setError("You must enter quantity!");
+                    return;
+                }
+                String type = chooseType.getText().toString();
+                if (TextUtils.isEmpty(type)|| !type.equals("CHOOSE TYPE")) {
+                    quant.setError("You must select type!");
+                    return;
+                }
+                Product.types Type = Product.types.valueOf(type);
+                Product p = new Product(ProductID, ProductName, Double.parseDouble(ProductPrice), Integer.parseInt(ProductQuant), Type);
+                myRef.child(ProductID).setValue(p, completionListener);
             }
         });
         chooseType.setOnClickListener(new View.OnClickListener() {

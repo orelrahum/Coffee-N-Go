@@ -68,6 +68,10 @@ public class DeleteProduct extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 myRef.getDatabase().getReference("Products/");
+                if(myProd==null){
+                    choose.setError("Please select Item to delete!");
+                    return;
+                }
                 Query deleteQuery = myRef.child(myProd.getId());
                 deleteQuery.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override

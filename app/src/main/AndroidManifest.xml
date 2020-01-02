@@ -9,7 +9,9 @@
         android:roundIcon="@drawable/coffeelogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CustomerOptions"></activity>
+        <activity android:name=".CreateNewWorker"></activity>
+        <activity android:name=".WorkerLogin" />
+        <activity android:name=".CustomerOptions" />
         <activity android:name=".WorkerActivity" />
         <activity android:name=".DeleteProduct" />
         <activity android:name=".UpdateProductDetails" />

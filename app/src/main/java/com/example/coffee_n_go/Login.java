@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,7 +24,6 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-//        getSupportActionBar().hide();       //hide title!!!
 
         Name = findViewById(R.id.etName);
         Password = findViewById(R.id.etPassword);
@@ -39,19 +39,23 @@ public class Login extends AppCompatActivity {
     }
 
     private void validate(String userName, String userPassword){
+        if(TextUtils.isEmpty(userName)){
+            Name.setError("You must enter name!");
+            return;
+        }
+        if(TextUtils.isEmpty(userPassword)){
+            Password.setError("You must enter Password!");
+            return;
+        }
         if(userName.equals("Admin") && userPassword.equals("1234")){
             Intent intent = new Intent(this, CeoActivity.class);
             startActivity(intent);
-        }
-        else if(userName.equals("Worker") && userPassword.equals("1234")){
-            Intent intent=new Intent(Login.this,WorkerActivity.class);
         }
         else{
             counter--;
             Info.setText("Nomber of attempts remaining: "+ counter);
             if(counter==0){
                 Login.setEnabled(false);
-                //
             }
         }
     }

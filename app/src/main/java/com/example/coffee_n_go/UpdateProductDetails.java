@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -48,9 +49,9 @@ public class UpdateProductDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_product_details);
         aboutEnd=findViewById(R.id.aboutToEndET);
-            Intent intent =getIntent();
-            String s=intent.getStringExtra("extra");
-            aboutEnd.setText(s);
+        Intent intent =getIntent();
+        String s=intent.getStringExtra("extra");
+        aboutEnd.setText(s);
         choose = findViewById(R.id.ChooseUpdateBtn);
         update = findViewById(R.id.UpdateBtn);
         name = findViewById(R.id.UpdateNameEt);
@@ -119,6 +120,10 @@ public class UpdateProductDetails extends AppCompatActivity {
                 String newPrice=price.getText().toString();
                 String newQant=quantity.getText().toString();
                 String newType=chooseType.getText().toString();
+                if(TextUtils.isEmpty(newName)|| temp == null){
+                    choose.setError("You must choose product!");
+                    return;
+                }
                 if(newName.equals(""))newName=temp.getName();
                 if(newPrice.equals(""))newPrice=temp.getPrice()+"";
                 if(newQant.equals(""))newQant=temp.getStocks()+"";

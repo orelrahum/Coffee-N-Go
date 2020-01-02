@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -279,8 +280,20 @@ public class CustomerActivity extends AppCompatActivity {
                 String UserName = nameET.getText().toString();
                 String Userphone = phone.getText().toString();
                 String Orderid = RootRef.push().getKey();
-                Order o = new Order(UserName, Userphone, TakeAway, productsOrder, Orderid, sum, "not served");
-                FirebaseDatabase.getInstance().getReference("Orders").child(Orderid).setValue(o, complitionListener);
+                if(TextUtils.isEmpty(UserName)){
+                    nameET.setError("Name is Required");
+                    return;
+                }
+                if(TextUtils.isEmpty(Userphone)){
+                    phone.setError("Phone is Required");
+                    return;
+                }
+                if (productsOrder.size() == 0)
+                    Toast.makeText(CustomerActivity.this, "Please Select at list one product!!", Toast.LENGTH_SHORT).show();
+                else {
+                    Order o = new Order(UserName, Userphone, TakeAway, productsOrder, Orderid, sum, "not served");
+                    FirebaseDatabase.getInstance().getReference("Orders").child(Orderid).setValue(o, complitionListener);
+                }
             }
         });
     }

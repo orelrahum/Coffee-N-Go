@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -20,6 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class InsertNewProdActivity extends AppCompatActivity {
 
@@ -34,6 +36,7 @@ public class InsertNewProdActivity extends AppCompatActivity {
     Product p;
     Button chooseType;
     Product.types selectedType;
+    TextView productsHave;
 
 
     @Override
@@ -45,6 +48,7 @@ public class InsertNewProdActivity extends AppCompatActivity {
         price=findViewById(R.id.InsProdPriceEt);
         quant=findViewById(R.id.InsProdQuanEt);
         chooseType=findViewById(R.id.typesBtn);
+        productsHave=findViewById(R.id.productsHaveTv);
         final Product.types[] possibleValues = Product.types.values();
         myDb=FirebaseDatabase.getInstance();
         myRef=myDb.getReference("Products");
@@ -70,12 +74,19 @@ public class InsertNewProdActivity extends AppCompatActivity {
                 String ProductQuant=quant.getText().toString();
                 String ProductID=myRef.push().getKey();
                 String type=chooseType.getText().toString();
-                Product.types Type=Product.types.valueOf(type);
-                Product p = new Product(ProductID,ProductName,Double.parseDouble(ProductPrice),Integer.parseInt(ProductQuant),Type);
-                if(products.contains(p.getName()))
-                    Toast.makeText(InsertNewProdActivity.this,"This product is already in!!",Toast.LENGTH_LONG).show();
-                else
-                    myRef.child(ProductID).setValue(p,completionListener);
+                try {
+                    Product.types Type = Product.types.valueOf(type);
+                    Product p = new Product(ProductID,ProductName,Double.parseDouble(ProductPrice),Integer.parseInt(ProductQuant),Type);
+                    if(products.contains(p.getName()))
+                        Toast.makeText(InsertNewProdActivity.this,"This product is already in!!",Toast.LENGTH_LONG).show();
+                    if(ProductPrice==""|ProductName==""|ProductQuant==""|type==""){
+                        Toast.makeText(InsertNewProdActivity.this,"Please fill all!!",Toast.LENGTH_LONG).show();
+                    }
+                    else
+                        myRef.child(ProductID).setValue(p,completionListener);
+                }catch (Exception e){
+                    Toast.makeText(InsertNewProdActivity.this,"Unable to insert this product,check if this product already in and fill all the details!!",Toast.LENGTH_LONG).show();
+                }
             }
         });
         chooseType.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +115,7 @@ public class InsertNewProdActivity extends AppCompatActivity {
             p = (ds.getValue(Product.class));
             products.add(p);
         }
+        productsHave.setText("The products that we have is : "+products.toString());
     }
 
     DatabaseReference.CompletionListener completionListener = new DatabaseReference.CompletionListener() {

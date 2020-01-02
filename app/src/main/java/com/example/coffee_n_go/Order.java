@@ -1,6 +1,9 @@
 package com.example.coffee_n_go;
 
+import android.text.format.Time;
+
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Order {
 
@@ -11,9 +14,10 @@ public class Order {
     private Double Price;
     private boolean TakeAway;
     private String Status;
+    private Time Date;
 
     public Order(){}
-    public Order(String orderName, String orderPhone,boolean takeAway, ArrayList<Product>myProd, String orderid,Double price,String status) {
+    public Order(String orderName, String orderPhone,boolean takeAway, ArrayList<Product>myProd, String orderid,Double price,String status,Time date) {
         CustomerName = orderName;
         CustomerPhone = orderPhone;
         Products = myProd;
@@ -21,6 +25,7 @@ public class Order {
         Price=price;
         TakeAway=takeAway;
         Status=status;
+        Date=date;
     }
 
     public String getOrderID() {
@@ -64,7 +69,7 @@ public class Order {
     }
 
     public String toString(){
-        String s=getCustomerName()+"\n"+getCustomerPhone()+"\nTake Away : "+TakeAway+"\n"+"\nStatus: "+getStatus()+"\n"+getProducts().toString()+"\n"+getPrice()+"\n";
+        String s=Date+"\n"+getCustomerName()+"\n"+getCustomerPhone()+"\nTake Away : "+TakeAway+"\n"+"\nStatus: "+getStatus()+"\n"+getProducts().toString()+"\n"+getPrice()+"\n";
         return s;
     }
 
@@ -82,5 +87,13 @@ public class Order {
 
     public void setStatus(String status) {
         Status = status;
+    }
+
+    public Time getDate() {
+        return Date;
+    }
+
+    public void setDate(Time date) {
+        Date = date;
     }
 }

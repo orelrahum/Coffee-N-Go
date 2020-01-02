@@ -74,23 +74,28 @@ public class InsertNewProdActivity extends AppCompatActivity {
                 String ProductPrice = price.getText().toString();
                 String ProductQuant = quant.getText().toString();
                 String ProductID = myRef.push().getKey();
-                if (products.contains(p.getName()))
-                    Toast.makeText(InsertNewProdActivity.this, "This product is already in!!", Toast.LENGTH_LONG).show();
+                if(products.size()>0) {
+                    if (products.contains(p.getName()))
+                        Toast.makeText(InsertNewProdActivity.this, "This product is already in!!", Toast.LENGTH_LONG).show();
+                }
                 if (TextUtils.isEmpty(ProductName)) {
                     name.setError("You must enter name!");
+                    name.requestFocus();
                     return;
                 }
                 if (TextUtils.isEmpty(ProductPrice)) {
                     price.setError("You must enter price!");
+                    price.requestFocus();
                     return;
                 }
                 if (TextUtils.isEmpty(ProductQuant)) {
                     quant.setError("You must enter quantity!");
+                    quant.requestFocus();
                     return;
                 }
                 String type = chooseType.getText().toString();
-                if (TextUtils.isEmpty(type)|| !type.equals("CHOOSE TYPE")) {
-                    quant.setError("You must select type!");
+                if (TextUtils.isEmpty(type)&& !type.equals("CHOOSE TYPE")) {
+                    chooseType.setError("You must select type!");
                     return;
                 }
                 Product.types Type = Product.types.valueOf(type);

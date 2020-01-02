@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.format.Time;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,7 +23,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class CustomerActivity extends AppCompatActivity {
@@ -291,7 +297,9 @@ public class CustomerActivity extends AppCompatActivity {
                 if (productsOrder.size() == 0)
                     Toast.makeText(CustomerActivity.this, "Please Select at list one product!!", Toast.LENGTH_SHORT).show();
                 else {
-                    Order o = new Order(UserName, Userphone, TakeAway, productsOrder, Orderid, sum, "not served");
+                    Time now = new Time();
+                    now.setToNow();
+                    Order o = new Order(UserName, Userphone, TakeAway, productsOrder, Orderid, sum, "not served",now);
                     FirebaseDatabase.getInstance().getReference("Orders").child(Orderid).setValue(o, complitionListener);
                 }
             }

@@ -22,6 +22,8 @@ public class WorkerActivity extends AppCompatActivity {
     ArrayList<Order> orders = new ArrayList<>();
     ListView listView;
     ArrayAdapter arrayAdapter;
+    String UID;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -35,6 +35,28 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="201dp"
+        android:layout_marginBottom="119dp"
         android:text="Insert" />
+
+    <EditText
+        android:id="@+id/NameNewEt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="331dp"
+        android:ems="10"
+        android:hint="Insert Name ..."
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/phoneNewEt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="276dp"
+        android:ems="10"
+        android:hint="Insert Phone ..."
+        android:inputType="phone" />
 </RelativeLayout>

@@ -120,7 +120,7 @@ public class UpdateProductDetails extends AppCompatActivity {
                 String newPrice=price.getText().toString();
                 String newQant=quantity.getText().toString();
                 String newType=chooseType.getText().toString();
-                if(TextUtils.isEmpty(newName)|| temp == null){
+                if( temp == null){
                     choose.setError("You must choose product!");
                     return;
                 }

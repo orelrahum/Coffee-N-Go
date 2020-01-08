@@ -23,8 +23,8 @@ public class MainActivity extends AppCompatActivity {
         button_worker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent i = new Intent(MainActivity.this, WorkerLogin.class);
+                i.putExtra("dest","worker");
                 startActivity(i);
             }
         });
@@ -33,7 +33,9 @@ public class MainActivity extends AppCompatActivity {
         button_CEO.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openWorker();
+                Intent intent = new Intent(MainActivity.this,WorkerLogin.class);
+                intent.putExtra("dest","ceo");
+                startActivity(intent);
             }
         });
 
@@ -46,9 +48,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-    }
-    public void openWorker(){
-        Intent intent = new Intent(this,Login.class);
-        startActivity(intent);
     }
 }

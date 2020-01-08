@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -29,7 +30,7 @@ public class CreateNewWorker extends AppCompatActivity {
     private EditText workerPhone;
     private Button login;
     private FirebaseAuth fAuth;
-    private String permissions="WORKER";
+    private String permissions;
     private DatabaseReference myRef;
     private FirebaseDatabase myDb;
 
@@ -47,6 +48,8 @@ public class CreateNewWorker extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         myDb = FirebaseDatabase.getInstance();
         myRef = myDb.getReference("Users");
+        Intent intent = getIntent();
+        permissions = intent.getStringExtra("permission");
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override

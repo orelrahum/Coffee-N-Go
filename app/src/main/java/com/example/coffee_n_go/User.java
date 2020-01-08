@@ -57,4 +57,8 @@ public class User {
     public void setPermissions(String permissions) {
         Permissions = permissions;
     }
+
+    public String toString(){
+        return "Name : "+getName()+","+"Email : "+getEmail()+","+"Phone : "+getPhoneNumber()+","+"Auth : "+getAuthID()+","+"Permissions : "+Permissions;
+    }
 }

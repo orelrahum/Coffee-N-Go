@@ -24,6 +24,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -297,9 +300,9 @@ public class CustomerActivity extends AppCompatActivity {
                 if (productsOrder.size() == 0)
                     Toast.makeText(CustomerActivity.this, "Please Select at list one product!!", Toast.LENGTH_SHORT).show();
                 else {
-                    Time now = new Time();
-                    now.setToNow();
-                    Order o = new Order(UserName, Userphone, TakeAway, productsOrder, Orderid, sum, "not served",now);
+                    DateFormat df = new SimpleDateFormat("dd/MM/yyyy, HH:mm");
+                    String date = df.format(Calendar.getInstance().getTime());
+                    Order o = new Order(UserName, Userphone, TakeAway, productsOrder, Orderid, sum, "not served",date);
                     FirebaseDatabase.getInstance().getReference("Orders").child(Orderid).setValue(o, complitionListener);
                 }
             }

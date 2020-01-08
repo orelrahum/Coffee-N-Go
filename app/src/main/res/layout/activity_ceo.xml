@@ -66,4 +66,16 @@
         android:layout_marginTop="305dp"
         android:layout_marginEnd="24dp"
         android:text="create new worker profile" />
+
+    <Button
+        android:id="@+id/CreateNewCeoBtn"
+        android:layout_width="179dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="102dp"
+        android:layout_marginEnd="130dp"
+        android:layout_marginBottom="278dp"
+        android:text="Create new ceo profile" />
 </RelativeLayout>

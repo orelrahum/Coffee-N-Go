@@ -1,9 +1,6 @@
 package com.example.coffee_n_go;
 
-import android.text.format.Time;
-
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Order {
 
@@ -14,10 +11,10 @@ public class Order {
     private Double Price;
     private boolean TakeAway;
     private String Status;
-    private Time Date;
+    private String Date;
 
     public Order(){}
-    public Order(String orderName, String orderPhone,boolean takeAway, ArrayList<Product>myProd, String orderid,Double price,String status,Time date) {
+    public Order(String orderName, String orderPhone,boolean takeAway, ArrayList<Product>myProd, String orderid,Double price,String status,String date) {
         CustomerName = orderName;
         CustomerPhone = orderPhone;
         Products = myProd;
@@ -89,11 +86,11 @@ public class Order {
         Status = status;
     }
 
-    public Time getDate() {
+    public String getDate() {
         return Date;
     }
 
-    public void setDate(Time date) {
+    public void setDate(String date) {
         Date = date;
     }
 }

@@ -26,6 +26,7 @@ public class CeoActivity extends AppCompatActivity {
     Button newProdBtn;
     Button removeProdBtn;
     Button insertNewWorker;
+    Button insertNewCeo;
     ArrayList<String>almostEnd=new ArrayList<>();
     DatabaseReference myRef;
     FirebaseDatabase myDb;
@@ -42,6 +43,7 @@ public class CeoActivity extends AppCompatActivity {
         newProdBtn=findViewById(R.id.insertProductsBtn);
         removeProdBtn=findViewById(R.id.RemoveProductBtn);
         insertNewWorker=findViewById(R.id.CreateNewWorkerBtn);
+        insertNewCeo = findViewById(R.id.CreateNewCeoBtn);
 
         myDb=FirebaseDatabase.getInstance();
         myRef=myDb.getReference("Products");
@@ -111,7 +113,17 @@ public class CeoActivity extends AppCompatActivity {
         insertNewWorker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(CeoActivity.this,CreateNewWorker.class));
+                Intent intent = new Intent(CeoActivity.this,CreateNewWorker.class);
+                intent.putExtra("permission","WORKER");
+                startActivity(intent);
+            }
+        });
+        insertNewCeo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CeoActivity.this,CreateNewWorker.class);
+                intent.putExtra("permission","MANAGER");
+                startActivity(intent);
             }
         });
     }

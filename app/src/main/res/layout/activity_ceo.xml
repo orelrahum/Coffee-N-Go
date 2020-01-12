@@ -6,16 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".CeoActivity">
 
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="213dp"
+        android:layout_height="169dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/coffee" />
+
     <Button
         android:id="@+id/changePricesBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="197dp"
+        android:layout_height="63dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="190dp"
-        android:layout_marginEnd="18dp"
-        android:layout_marginBottom="465dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="111dp"
+        android:layout_marginEnd="103dp"
+        android:layout_marginBottom="434dp"
         android:text="update product details"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,15 +38,45 @@
         app:layout_constraintVertical_bias="0.499" />
 
     <Button
-        android:id="@+id/insertProductsBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:id="@+id/CreateNewCeoBtn"
+        android:layout_width="197dp"
+        android:layout_height="63dp"
+        android:layout_alignStart="@+id/CreateNewWorkerBtn"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="14dp"
-        android:layout_marginEnd="224dp"
-        android:layout_marginBottom="465dp"
+        android:layout_marginStart="196dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="499dp"
+        android:text="Create new ceo profile" />
+
+    <Button
+        android:id="@+id/RemoveProductBtn"
+        android:layout_width="197dp"
+        android:layout_height="63dp"
+        android:layout_alignStart="@+id/insertProductsBtn"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="197dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="560dp"
+        android:text="Remove product"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.464"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/insertProductsBtn"
+        android:layout_width="197dp"
+        android:layout_height="63dp"
+        android:layout_above="@+id/changePricesBtn"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="7dp"
+        android:layout_marginEnd="206dp"
+        android:layout_marginBottom="63dp"
         android:text="insert new product"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,41 +86,17 @@
         app:layout_constraintVertical_bias="0.499" />
 
     <Button
-        android:id="@+id/RemoveProductBtn"
-        android:layout_width="168dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="17dp"
-        android:layout_marginEnd="226dp"
-        android:layout_marginBottom="377dp"
-        android:text="Remove product"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.464"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
         android:id="@+id/CreateNewWorkerBtn"
-        android:layout_width="192dp"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="47dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="305dp"
-        android:layout_marginEnd="24dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="187dp"
+        android:layout_marginEnd="206dp"
+        android:layout_marginBottom="497dp"
         android:text="create new worker profile" />
 
-    <Button
-        android:id="@+id/CreateNewCeoBtn"
-        android:layout_width="179dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="102dp"
-        android:layout_marginEnd="130dp"
-        android:layout_marginBottom="278dp"
-        android:text="Create new ceo profile" />
 </RelativeLayout>

@@ -53,6 +53,7 @@ public class CustomerActivity extends AppCompatActivity {
     boolean arrIsChecked[];
     boolean TakeAway = false;
     double diff = 0;
+    String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -302,6 +303,7 @@ public class CustomerActivity extends AppCompatActivity {
                 else {
                     DateFormat df = new SimpleDateFormat("dd/MM/yyyy, HH:mm");
                     String date = df.format(Calendar.getInstance().getTime());
+                    userName=UserName;
                     Order o = new Order(UserName, Userphone, TakeAway, productsOrder, Orderid, sum, "not served",date);
                     FirebaseDatabase.getInstance().getReference("Orders").child(Orderid).setValue(o, complitionListener);
                 }
@@ -339,6 +341,7 @@ public class CustomerActivity extends AppCompatActivity {
                 }
                 Intent intent = new Intent(CustomerActivity.this, Pop.class);
                 intent.putExtra("sum", sum);
+                intent.putExtra("name",userName);
                 startActivity(intent);
                 products.clear();
                 productsOrder.clear();
@@ -351,6 +354,7 @@ public class CustomerActivity extends AppCompatActivity {
                 Food.setText("Choose");
                 Snack.setText("Choose");
                 sum = 0;
+                userName="";
             }
         }
     };

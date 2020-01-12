@@ -81,6 +81,7 @@ public class WorkerLogin extends AppCompatActivity {
                                 if (user.getPermissions().equals("MANAGER")) {
                                     Intent intent = new Intent(WorkerLogin.this, CeoActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    intent.putExtra("name",user.getName());
                                     startActivity(intent);
                                 } else {
                                     Toast.makeText(WorkerLogin.this, "You don't have permissions!!", Toast.LENGTH_LONG).show();

@@ -13,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,7 +32,8 @@ public class CeoActivity extends AppCompatActivity {
     DatabaseReference myRef;
     FirebaseDatabase myDb;
     int minStackToAlert=15;
-
+    TextView welcome;
+    String userName="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,10 @@ public class CeoActivity extends AppCompatActivity {
         removeProdBtn=findViewById(R.id.RemoveProductBtn);
         insertNewWorker=findViewById(R.id.CreateNewWorkerBtn);
         insertNewCeo = findViewById(R.id.CreateNewCeoBtn);
+        welcome = findViewById(R.id.managerWelcomeTv);
+        Intent intent =getIntent();
+        userName=intent.getStringExtra("name");
+        welcome.setText(welcome.getText()+userName);
 
         myDb=FirebaseDatabase.getInstance();
         myRef=myDb.getReference("Products");

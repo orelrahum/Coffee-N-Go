@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorAccent"
     android:padding="20dp"
     tools:context=".WorkerLogin">
 
@@ -59,4 +60,5 @@
         app:layout_constraintHorizontal_bias="0.021"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="264dp" />
+
 </RelativeLayout>

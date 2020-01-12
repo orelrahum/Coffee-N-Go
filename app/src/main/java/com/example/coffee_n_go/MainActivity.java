@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,WorkerLogin.class);
-                intent.putExtra("dest","ceo");
+                intent.putExtra("dest","manager");
                 startActivity(intent);
             }
         });

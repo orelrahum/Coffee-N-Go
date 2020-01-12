@@ -75,7 +75,7 @@ public class WorkerLogin extends AppCompatActivity {
                         Intent intent = new Intent(WorkerLogin.this, WorkerActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
-                    } else if(dest.equals("ceo")) {
+                    } else if(dest.equals("manager")) {
                         for (User user : users) {
                             if (user.getAuthID().equals(Uid)) {
                                 if (user.getPermissions().equals("MANAGER")) {

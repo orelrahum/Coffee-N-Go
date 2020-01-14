@@ -125,6 +125,7 @@ public class InsertNewProdActivity extends AppCompatActivity {
     }
 
     private void showData(DataSnapshot dataSnapshot) {
+        products.clear();
         for (DataSnapshot ds : dataSnapshot.getChildren()) {
             p = (ds.getValue(Product.class));
             products.add(p);

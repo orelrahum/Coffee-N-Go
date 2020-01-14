@@ -73,7 +73,7 @@ public class CeoActivity extends AppCompatActivity {
                     if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
                         String channelId = "MY_CHANNEL_ID";
                         NotificationChannel channel = new NotificationChannel(channelId,"channel 1",NotificationManager.IMPORTANCE_DEFAULT);
-                        channel.setDescription("Ceo channel");
+                        channel.setDescription("Manager channel");
                         notificationManager.createNotificationChannel(channel);
                         NotificationCompat.Builder builder=new NotificationCompat.Builder(getApplicationContext(),channelId);
                         Notification notification = builder.setContentIntent(pendingIntent)

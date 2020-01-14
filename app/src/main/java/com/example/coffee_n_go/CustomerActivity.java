@@ -52,7 +52,7 @@ public class CustomerActivity extends AppCompatActivity {
     double sum = 0;
     boolean arrIsChecked[];
     boolean TakeAway = false;
-    double diff = 0;
+    double diff = 2;
     String userName;
 
     @Override
@@ -70,8 +70,8 @@ public class CustomerActivity extends AppCompatActivity {
         RootRef = myDataBase.getReference("Products");
         Intent intent = getIntent();
         TakeAway = intent.getBooleanExtra("TakeAway", false);
-        if (!TakeAway)
-            diff = 2;
+        if (TakeAway)
+            diff = 0;
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -143,11 +143,11 @@ public class CustomerActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         for (boolean bol : arrIsChecked) bol = false;
+                        for(Product prod : drinksOrder) sum -= (prod.getPrice() + diff);
                         productsOrder.removeAll(drinksOrder);
                         drinksOrder.clear();
                         Drink.setText("Choose");
-                        sum = 0;
-                    }
+                            }
                 });
                 AlertDialog dialog = mBuilder.create();
                 dialog.show();
@@ -207,10 +207,10 @@ public class CustomerActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         for (boolean bol : arrIsChecked) bol = false;
+                        for(Product prod : foodsOrder) sum -= (prod.getPrice() + diff);
                         productsOrder.removeAll(foodsOrder);
                         foodsOrder.clear();
                         Food.setText("Choose");
-                        sum = 0;
                     }
                 });
                 AlertDialog dialog = mBuilder.create();
@@ -270,10 +270,10 @@ public class CustomerActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         for (boolean bol : arrIsChecked) bol = false;
+                        for(Product prod : snacksOrder) sum -= (prod.getPrice() + diff);
                         productsOrder.removeAll(snacksOrder);
                         snacksOrder.clear();
                         Snack.setText("Choose");
-                        sum = 0;
                     }
                 });
                 AlertDialog dialog = mBuilder.create();
@@ -393,6 +393,7 @@ public class CustomerActivity extends AppCompatActivity {
             snacksOrder.clear();
             foodsOrder.clear();
             drinksOrder.clear();
+            sum=0;
             Toast.makeText(CustomerActivity.this, "Clear", Toast.LENGTH_SHORT).show();
         }
         return true;

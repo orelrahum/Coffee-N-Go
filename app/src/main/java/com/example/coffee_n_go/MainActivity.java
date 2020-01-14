@@ -13,12 +13,12 @@ public class MainActivity extends AppCompatActivity {
     private Button button_worker;
     private Button button_CEO;
     private Button button_customer;
-    public Map<String, Object> user = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         button_worker = (Button) findViewById(R.id.worker);
         button_worker.setOnClickListener(new View.OnClickListener() {
             @Override
